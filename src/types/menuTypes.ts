@@ -6,7 +6,7 @@ export interface MenuTopic {
 }
 
 export const MENU_TOPICS: MenuTopic[] = [
-  { id: "Bienvenida", label: "Bienvenida" },
+  { id: "Bienvenida", label: "Login & Bienvenida" },
   { id: "Panel Usuarios", label: "Panel Usuarios" },
   { id: "Panel Planetas", label: "Panel Planetas" },
   { id: "Panel Simulaciones", label: "Panel Simulaciones" },

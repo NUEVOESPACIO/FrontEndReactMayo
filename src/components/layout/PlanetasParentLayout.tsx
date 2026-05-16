@@ -6,7 +6,7 @@ interface TwoColumnLayoutProps {
   rightTitle: string;
 }
 
-export default function TwoColumnLayout({
+export default function UsuariosParentLayout({
   title,
   leftTitle,
   rightTitle,

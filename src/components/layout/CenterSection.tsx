@@ -1,7 +1,9 @@
 import type { MenuTopicId } from "../../types/menuTypes";
-import WelcomeLayout from "./WelcomeLayout";
-import SingleColumnLayout from "./SingleColumnLayout";
-import TwoColumnLayout from "./TwoColumnLayout";
+import WelcomeAndLoginLayout from "./WelcomeAndLoginLayout";
+import UsuariosParentLayout from "./UsuariosParentLayout";
+import PlanetasParentLayout from "./PlanetasParentLayout";
+import SimulacionesParentLayout from "./SimulacionesParentLayout";
+import SobreMiLayout from "./SobreMiLayout";
 
 interface CenterSectionProps {
   activeMenu: MenuTopicId;
@@ -10,27 +12,37 @@ interface CenterSectionProps {
 function renderCenterContent(activeMenu: MenuTopicId) {
   switch (activeMenu) {
     case "Bienvenida":
-      return <WelcomeLayout />;
+      return <WelcomeAndLoginLayout />;
     case "Panel Usuarios":
-      return <SingleColumnLayout title="Topic 1 — Single column" />;
+      return (
+        <UsuariosParentLayout
+          title="Panel de Usuarios"
+          leftTitle="Usuarios"
+          rightTitle="Detalle de usuarios"
+        />
+      );
     case "Panel Planetas":
       return (
-        <TwoColumnLayout
-          title="Topic 2 — Two columns"
-          leftTitle="Column A"
-          rightTitle="Column B"
+        <PlanetasParentLayout
+          title="Panel de Planetas"
+          leftTitle="Listado de Planetas"
+          rightTitle="Detalle de Planetas"
         />
       );
     case "Panel Simulaciones":
       return (
-        <TwoColumnLayout
-          title="Topic 3 — Two columns"
-          leftTitle="Primary panel"
-          rightTitle="Secondary panel"
+        <SimulacionesParentLayout
+          title="Panel de Simulaciones"
+          leftTitle="Listado de Simulaciones"
+          rightTitle="Detalle de simulaciones"
         />
       );
+      case "Sobre mi":
+        return (
+          <SobreMiLayout />
+        );
     default:
-      return <WelcomeLayout />;
+      return <WelcomeAndLoginLayout/>;
   }
 }
 
