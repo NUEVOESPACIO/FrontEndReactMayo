@@ -10,9 +10,9 @@ export default function TopicMenu({ activeId, onSelect }: TopicMenuProps) {
   return (
     <nav
       aria-label="Topic menu"
-      className="shrink-0 border-b border-slate-200 bg-white shadow-sm"
+      className="shrink-0 border-b border-indigo-200/80 bg-indigo-100 shadow-sm"
     >
-      <ul className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 py-2">
+      <ul className="flex justify-start gap-2 overflow-x-auto px-6 py-3">
         {MENU_TOPICS.map((topic) => {
           const isActive = activeId === topic.id;
 
@@ -22,12 +22,12 @@ export default function TopicMenu({ activeId, onSelect }: TopicMenuProps) {
                 type="button"
                 onClick={() => onSelect(topic.id)}
                 className={`
-                  rounded-lg px-4 py-2 text-sm font-medium whitespace-nowrap
-                  transition-colors
+                  rounded-lg px-5 py-2.5 text-base font-semibold whitespace-nowrap
+                  transition-colors sm:text-lg
                   ${
                     isActive
-                      ? "bg-indigo-600 text-white shadow-sm"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                      ? "bg-violet-700 text-white shadow-md ring-2 ring-violet-400/50"
+                      : "bg-white/80 text-indigo-900 hover:bg-white hover:text-violet-800"
                   }
                 `}
               >
