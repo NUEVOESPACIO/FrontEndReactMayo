@@ -11,6 +11,7 @@ import {
 import { login } from "../../services/authServices";
 
 import { useAuth } from "../../hooks/useAuths";
+import type { User } from "../../types/authTypes";
 
 export default function LoginForm() {
 
@@ -18,7 +19,8 @@ export default function LoginForm() {
     useState("");
 
   const navigate = useNavigate();
-  const { login: authLogin } = useAuth();
+  const { token, user, login: authLogin } = useAuth();
+  const isLoggedIn = Boolean(token);
 
   const { register, handleSubmit, formState: { errors, isSubmitting, }, } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -55,6 +57,20 @@ export default function LoginForm() {
       setServerError(message);
     }
   };
+
+  if (isLoggedIn) {
+    const displayName = user?.name ?? user?.username ?? "usuario";
+
+    return (
+      <div className={containerStyles}>
+        <h1 className={titleStyles}>¡Bienvenido, {displayName}!</h1>
+        <p className="mb-6 text-center text-slate-600 leading-relaxed">
+          Tu sesión está activa. Gracias por usar Gravity.
+        </p>
+        {user ? <UserDataDisplay user={user} /> : null}
+      </div>
+    );
+  }
 
   return (
     <div className={containerStyles}>
@@ -132,6 +148,28 @@ export default function LoginForm() {
 
       </form>
     </div>
+  );
+}
+
+function UserDataDisplay({ user }: { user: User }) {
+  const fields: { label: string; value: string | number }[] = [
+    { label: "ID", value: user.id },
+    { label: "Name", value: user.name },
+    ...(user.surname ? [{ label: "Surname", value: user.surname }] : []),
+    ...(user.username ? [{ label: "Username", value: user.username }] : []),
+    { label: "Email", value: user.email },
+    { label: "Role", value: user.role },
+  ];
+
+  return (
+    <dl className="space-y-3 rounded-lg bg-slate-50 p-4 text-sm">
+      {fields.map(({ label, value }) => (
+        <div key={label} className="flex justify-between gap-4">
+          <dt className="font-medium text-slate-500">{label}</dt>
+          <dd className="text-right text-slate-800">{value}</dd>
+        </div>
+      ))}
+    </dl>
   );
 }
 

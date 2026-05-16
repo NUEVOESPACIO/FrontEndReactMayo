@@ -6,6 +6,7 @@ export interface LoginRequest {
 export interface User {
   id: number;
   name: string;
+  surname?: string;
   username?: string;
   email: string;
   role: string;
@@ -13,5 +14,5 @@ export interface User {
 
 export interface LoginResponse {
   token: string;
-  user: User;
+  user: User | null;
 }

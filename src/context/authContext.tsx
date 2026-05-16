@@ -11,7 +11,7 @@ import {
     token: string | null;
     login: (
       token: string,
-      user: User
+      user: User | null
     ) => void;
     logout: () => void;
   }
@@ -40,24 +40,31 @@ import {
       const savedUser =
         localStorage.getItem("user");
   
-      if (savedToken && savedUser) {
+      if (savedToken) {
         setToken(savedToken);
-        setUser(JSON.parse(savedUser));
+
+        if (savedUser) {
+          try {
+            setUser(JSON.parse(savedUser) as User);
+          } catch {
+            localStorage.removeItem("user");
+          }
+        }
       }
     }, []);
   
     const handleLogin = (
       token: string,
-      user: User
+      user: User | null
     ) => {
-  
       localStorage.setItem("token", token);
-  
-      localStorage.setItem(
-        "user",
-        JSON.stringify(user)
-      );
-  
+
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+      } else {
+        localStorage.removeItem("user");
+      }
+
       setToken(token);
       setUser(user);
     };

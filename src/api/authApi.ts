@@ -1,4 +1,5 @@
 import { apiClient } from "./axiosClient";
+import { normalizeLoginResponse } from "../utils/normalizeLoginResponse";
 
 import type {
   LoginRequest,
@@ -26,5 +27,5 @@ export const loginRequest = async (
     data
   );
 
-  return response.data;
+  return normalizeLoginResponse(response.data);
 };

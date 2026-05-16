@@ -5,12 +5,8 @@ export const login = async (
   password: string
 ) => {
 
-  const data = await loginRequest({
+  return loginRequest({
     username,
     password,
   });
-
-  localStorage.setItem("token", data.token);
-
-  return data;
 };
