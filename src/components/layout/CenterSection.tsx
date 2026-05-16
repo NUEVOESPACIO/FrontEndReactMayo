@@ -1,4 +1,5 @@
 import type { MenuTopicId } from "../../types/menuTypes";
+import GoodbyeLayout from "./GoodbyeLayout";
 import WelcomeAndLoginLayout from "./WelcomeAndLoginLayout";
 import UsuariosParentLayout from "./UsuariosParentLayout";
 import PlanetasParentLayout from "./PlanetasParentLayout";
@@ -6,10 +7,14 @@ import SimulacionesParentLayout from "./SimulacionesParentLayout";
 import SobreMiLayout from "./SobreMiLayout";
 
 interface CenterSectionProps {
-  activeMenu: MenuTopicId;
+  activeMenu: MenuTopicId | null;
 }
 
-function renderCenterContent(activeMenu: MenuTopicId) {
+function renderCenterContent(activeMenu: MenuTopicId | null) {
+  if (activeMenu === null) {
+    return <GoodbyeLayout />;
+  }
+
   switch (activeMenu) {
     case "Bienvenida":
       return <WelcomeAndLoginLayout />;

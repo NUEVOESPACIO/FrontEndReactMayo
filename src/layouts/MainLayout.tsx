@@ -7,14 +7,26 @@ import Footer from "../components/layout/Footer";
 import CenterSection from "../components/layout/CenterSection";
 
 export default function MainLayout() {
-  const [activeMenu, setActiveMenu] = useState<MenuTopicId>("Bienvenida");
+  const [activeMenu, setActiveMenu] = useState<MenuTopicId | null>("Bienvenida");
+
+  const handleMenuSelect = (id: MenuTopicId) => {
+    setActiveMenu(id);
+  };
+
+  const handleAfterLogout = () => {
+    setActiveMenu(null);
+  };
 
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-slate-100">
       <Header />
-      <TopicMenu activeId={activeMenu} onSelect={setActiveMenu} />
+      <TopicMenu
+        activeId={activeMenu}
+        onSelect={handleMenuSelect}
+        onAfterLogout={handleAfterLogout}
+      />
 
-      <main className="min-h-0 flex-1 overflow-hidden">
+      <main className="relative z-0 min-h-0 flex-1 overflow-hidden">
         <CenterSection activeMenu={activeMenu} />
       </main>
 

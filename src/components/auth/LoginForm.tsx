@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -16,6 +17,7 @@ export default function LoginForm() {
   const [serverError, setServerError] =
     useState("");
 
+  const navigate = useNavigate();
   const { login: authLogin } = useAuth();
 
   const { register, handleSubmit, formState: { errors, isSubmitting, }, } = useForm<LoginFormData>({
@@ -42,7 +44,7 @@ export default function LoginForm() {
         response.user
       );
 
-      console.log("LOGIN OK");
+      navigate("/");
 
     } catch (error: any) {
 
