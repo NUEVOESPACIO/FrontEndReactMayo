@@ -1,4 +1,5 @@
 import { useAuth } from "../../hooks/useAuths";
+import { ROLE_LABELS } from "../../types/roles";
 
 function SessionInactiveIcon({ className }: { className?: string }) {
   return (
@@ -43,7 +44,10 @@ function SessionActiveIcon({ className }: { className?: string }) {
 export default function Header() {
   const { token, user } = useAuth();
   const isLoggedIn = Boolean(token);
-  const displayName = user?.username ?? user?.name;
+  const displayName = user?.username;
+  const roleName = user?.rol
+  ? ROLE_LABELS[user.rol] ?? user.rol
+  : undefined;
 
   return (
     <header className="shrink-0 border-b border-indigo-800/50 bg-gradient-to-r from-indigo-950 via-violet-900 to-indigo-900 px-6 py-5 text-white shadow-lg">
@@ -58,11 +62,10 @@ export default function Header() {
         </div>
 
         <div
-          className={`flex shrink-0 items-center gap-2.5 rounded-lg border px-4 py-2.5 ${
-            isLoggedIn
+          className={`flex shrink-0 items-center gap-2.5 rounded-lg border px-4 py-2.5 ${isLoggedIn
               ? "border-emerald-400/40 bg-emerald-500/10"
               : "border-indigo-400/30 bg-indigo-950/40"
-          }`}
+            }`}
           role="status"
           aria-live="polite"
           aria-label={
@@ -79,6 +82,12 @@ export default function Header() {
                 <span className="font-semibold text-white">
                   {displayName ?? "usuario"}
                 </span>
+                {roleName && (
+                  <span className="text-emerald-200">
+                    {" "}
+                    ({roleName})
+                  </span>
+                )}
               </p>
             </>
           ) : (

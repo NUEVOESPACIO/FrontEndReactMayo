@@ -59,7 +59,7 @@ export default function LoginForm() {
   };
 
   if (isLoggedIn) {
-    const displayName = user?.name ?? user?.username ?? "usuario";
+    const displayName = user?.username ?? "usuario";
 
     return (
       <div className={containerStyles}>
@@ -153,12 +153,9 @@ export default function LoginForm() {
 
 function UserDataDisplay({ user }: { user: User }) {
   const fields: { label: string; value: string | number }[] = [
-    { label: "ID", value: user.id },
-    { label: "Name", value: user.name },
-    ...(user.surname ? [{ label: "Surname", value: user.surname }] : []),
-    ...(user.username ? [{ label: "Username", value: user.username }] : []),
-    { label: "Email", value: user.email },
-    { label: "Role", value: user.role },
+    { label: "ID", value: user.id },        
+    ...(user.username ? [{ label: "Username", value: user.username }] : []),    
+    { label: "Role", value: user.rol },
   ];
 
   return (

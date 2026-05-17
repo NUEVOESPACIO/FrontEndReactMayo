@@ -19,21 +19,21 @@ function isRecord(value: unknown): value is RawRecord {
 function mapToUser(raw: RawRecord): User {
   return {
     id: Number(raw.id ?? 0),
-    name: String(raw.name ?? raw.nombre ?? "Usuario"),
-    surname:
-      raw.surname != null
-        ? String(raw.surname)
-        : raw.apellido != null
-          ? String(raw.apellido)
-          : undefined,
+    //name: String(raw.name ?? raw.nombre ?? "Usuario"),
+    //surname:
+    //  raw.surname != null
+    //    ? String(raw.surname)
+    //    : raw.apellido != null
+    //      ? String(raw.apellido)
+    //      : undefined,
     username:
       raw.username != null
         ? String(raw.username)
         : raw.usuario != null
           ? String(raw.usuario)
           : undefined,
-    email: String(raw.email ?? ""),
-    role: String(raw.role ?? raw.rol ?? "USER"),
+    //email: String(raw.email ?? ""),
+    rol: String(raw.role ?? raw.rol ?? "USER"),
   };
 }
 

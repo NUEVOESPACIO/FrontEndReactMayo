@@ -5,11 +5,11 @@ export interface LoginRequest {
 
 export interface User {
   id: number;
-  name: string;
-  surname?: string;
+  //name: string;
+  //surname?: string;
   username?: string;
-  email: string;
-  role: string;
+  //email: string;
+  rol: string;
 }
 
 export interface LoginResponse {
