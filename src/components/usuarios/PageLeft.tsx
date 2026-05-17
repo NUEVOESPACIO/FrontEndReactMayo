@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { fetchUsers } from "../../api/usersApi";
 import { useAuth } from "../../hooks/useAuths";
 import { getRoleLabel } from "../../types/roles";
-import type { User } from "../../types/authTypes";
+import { listadousuarios } from "../../services/usersApi";
+import type { UserInfo } from "../../types/userInfo";
 
 interface PageLeftProps {
   selectedId: number | null;
@@ -11,7 +11,7 @@ interface PageLeftProps {
 
 export default function PageLeft({ selectedId, onSelectId }: PageLeftProps) {
   const { token } = useAuth();
-  const [usuarios, setUsuarios] = useState<User[]>([]);
+  const [usuarios, setUsuarios] = useState<UserInfo[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -30,7 +30,7 @@ export default function PageLeft({ selectedId, onSelectId }: PageLeftProps) {
       setError(null);
 
       try {
-        const data = await fetchUsers();
+        const data = await listadousuarios();
         if (!cancelled) {
           setUsuarios(data);
         }
@@ -78,7 +78,7 @@ export default function PageLeft({ selectedId, onSelectId }: PageLeftProps) {
       <p className="mb-3 text-sm font-medium text-slate-700">Lista de usuarios</p>
       {usuarios.map((usuario) => {
         const isSelected = usuario.id === selectedId;
-        const roleLabel = getRoleLabel(usuario.rol);
+        const roleLabel = getRoleLabel(usuario.roleName);
         const displayName = usuario.username ?? `Usuario ${usuario.id}`;
 
         return (

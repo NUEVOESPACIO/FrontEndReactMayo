@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { fetchUserById } from "../../api/usersApi";
+import { listadousuariosById } from "../../services/usersApi";
 import { useAuth } from "../../hooks/useAuths";
 import { getRoleLabel } from "../../types/roles";
-import type { User } from "../../types/authTypes";
+import type { UserInfo } from "../../types/userInfo";
 
 interface PageRightProps {
   idToShow: number | null;
@@ -10,7 +10,7 @@ interface PageRightProps {
 
 export default function PageRight({ idToShow }: PageRightProps) {
   const { token } = useAuth();
-  const [usuario, setUsuario] = useState<User | null>(null);
+  const [usuario, setUsuario] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +29,7 @@ export default function PageRight({ idToShow }: PageRightProps) {
       setError(null);
 
       try {
-        const data = await fetchUserById(idToShow);
+        const data = await listadousuariosById(idToShow);
         if (!cancelled) {
           setUsuario(data);
           if (!data) {
@@ -83,7 +83,7 @@ export default function PageRight({ idToShow }: PageRightProps) {
     return null;
   }
 
-  const roleLabel = getRoleLabel(usuario.rol);
+  const roleLabel = getRoleLabel(usuario.roleName);
   const displayName = usuario.username ?? `Usuario ${usuario.id}`;
 
   return (
