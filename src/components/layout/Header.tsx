@@ -1,5 +1,5 @@
 import { useAuth } from "../../hooks/useAuths";
-import { ROLE_LABELS } from "../../types/roles";
+import { getRoleLabel } from "../../types/roles";
 
 function SessionInactiveIcon({ className }: { className?: string }) {
   return (
@@ -45,9 +45,7 @@ export default function Header() {
   const { token, user } = useAuth();
   const isLoggedIn = Boolean(token);
   const displayName = user?.username;
-  const roleName = user?.rol
-  ? ROLE_LABELS[user.rol] ?? user.rol
-  : undefined;
+  const roleName = user?.rol ? getRoleLabel(user.rol) : undefined;
 
   return (
     <header className="shrink-0 border-b border-indigo-800/50 bg-gradient-to-r from-indigo-950 via-violet-900 to-indigo-900 px-6 py-5 text-white shadow-lg">

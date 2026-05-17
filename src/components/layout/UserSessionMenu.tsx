@@ -105,9 +105,9 @@ export default function UserSessionMenu({
             <p className="mt-0.5 text-sm font-semibold text-indigo-950">
               {isLoggedIn ? "Sesión iniciada" : "Sin sesión"}
             </p>
-            {isLoggedIn && user?.name && (
+            {isLoggedIn && user?.username && (
               <p className="mt-0.5 truncate text-xs text-indigo-600">
-                {user.name}
+                {user.username}
               </p>
             )}
           </div>

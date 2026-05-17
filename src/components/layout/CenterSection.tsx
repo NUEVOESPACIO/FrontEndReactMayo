@@ -19,13 +19,7 @@ function renderCenterContent(activeMenu: MenuTopicId | null) {
     case "Bienvenida":
       return <WelcomeAndLoginLayout />;
     case "Panel Usuarios":
-      return (
-        <UsuariosParentLayout
-          title="Panel de Usuarios"
-          leftTitle="Usuarios"
-          rightTitle="Detalle de usuarios"
-        />
-      );
+      return <UsuariosParentLayout />;
     case "Panel Planetas":
       return (
         <PlanetasParentLayout
