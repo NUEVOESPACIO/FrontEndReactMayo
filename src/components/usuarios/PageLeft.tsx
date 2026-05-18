@@ -10,10 +10,11 @@ interface PageLeftProps {
 }
 
 export default function PageLeft({ selectedId, onSelectId }: PageLeftProps) {
-  const { token } = useAuth();
+  const { token,user } = useAuth();
   const [usuarios, setUsuarios] = useState<UserInfo[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  
 
   useEffect(() => {
     if (!token) {
@@ -80,6 +81,7 @@ export default function PageLeft({ selectedId, onSelectId }: PageLeftProps) {
         const isSelected = usuario.id === selectedId;
         const roleLabel = getRoleLabel(usuario.roleName);
         const displayName = usuario.username ?? `Usuario ${usuario.id}`;
+        const isCurrentUser = usuario.id === user?.id;
 
         return (
           <button
@@ -92,7 +94,27 @@ export default function PageLeft({ selectedId, onSelectId }: PageLeftProps) {
                 : "border-slate-200 bg-white hover:border-indigo-200 hover:bg-slate-50"
             }`}
           >
-            <p className="font-medium text-slate-900">{displayName}</p>
+           <div className="flex items-center gap-2">
+  <p className="font-medium text-slate-900">
+    {displayName}
+  </p>
+
+  {isCurrentUser && (
+    <span
+      className="
+        rounded-full
+        bg-indigo-100
+        px-2
+        py-0.5
+        text-xs
+        font-semibold
+        text-indigo-700
+      "
+    >
+      TÚ
+    </span>
+  )}
+</div>
             <p className="mt-0.5 text-sm text-slate-600">{roleLabel}</p>
           </button>
         );
