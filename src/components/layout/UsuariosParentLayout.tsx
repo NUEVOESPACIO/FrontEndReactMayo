@@ -10,9 +10,19 @@ import { useAuth } from "../../hooks/useAuths";
 import PageLeft from "../usuarios/PageLeft";
 import PageRight from "../usuarios/PageRight";
 import UserCreateForm from "../usuarios/UserCreateForm";
+import UserCreatedSuccess from "../usuarios/UserCreateSucess";
 
 export default function UsuariosParentLayout() {
   const { user } = useAuth();
+  const [refreshKey, setRefreshKey] =  useState(0);
+
+  const handleUserCreated = () => {
+    // refresca listado
+    setRefreshKey((prev) => prev + 1);
+  
+    // cambia panel derecho
+    setIdToShow(-2);
+  };
 
   const [idToShow, setIdToShow] =
     useState<number | null>(null);
@@ -232,11 +242,11 @@ export default function UsuariosParentLayout() {
               overflow-y-auto
               p-4
             "
-          >
-            <PageLeft
-              selectedId={idToShow}
-              onSelectId={setIdToShow}
-            />
+          ><PageLeft
+          key={refreshKey}
+          selectedId={idToShow}
+          onSelectId={setIdToShow}
+        />
           </div>
         </section>
 
@@ -297,8 +307,12 @@ export default function UsuariosParentLayout() {
               p-4
             "
           >
-            {idToShow === -1 ? (
-  <UserCreateForm />
+           { idToShow === -1 ? (
+  <UserCreateForm
+    onCreated={handleUserCreated}
+  />
+) : idToShow === -2 ? (
+  <UserCreatedSuccess />
 ) : (
   <PageRight idToShow={idToShow} />
 )}

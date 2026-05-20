@@ -4,6 +4,10 @@ import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
+interface UserCreateFormProps {
+  onCreated: () => void;
+}
+
 import {
   userCreateSchema,
   type UserCreateFormData,
@@ -12,7 +16,11 @@ import {
 import { createUser } from "../../services/usersApi";
 import { ROLE_LABELS } from "../../types/roles";
 
-export default function UserCreateForm() {
+
+
+export default function UserCreateForm({
+  onCreated,
+}: UserCreateFormProps) {
 
   const [serverError, setServerError] =
     useState("");
@@ -111,9 +119,8 @@ export default function UserCreateForm() {
         mimeType,
 
         RoleName: data.RoleName,
-      });
-
-      alert("Usuario creado");
+      });onCreated();
+      
 
     } catch (error: any) {
 
