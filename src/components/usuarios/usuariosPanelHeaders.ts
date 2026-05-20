@@ -15,7 +15,7 @@ export const USUARIOS_PANEL_HEADER_BY_ROLE: Record<string, UsuariosPanelHeader> 
     ROLE_FISICO: {
       title: "Usuarios con el rol FISICO",
       description:
-        "Modifica tu informacion propia, accede a datos generales de todos los usuarios y a información extra sobre otros usuarios con rol de FISICO.",
+        "Modifica tu informacion propia, accede a datos generales de todos los usuarios y a información extra sobre otros usuarios con rol de CIENTIFICO.",
     },
     ROLE_ASTRONOMO: {
       title: "Usuarios con rol ASTRONOMO",

@@ -75,8 +75,7 @@ export default function PageLeft({ selectedId, onSelectId }: PageLeftProps) {
   }
 
   return (
-    <div className="space-y-2">
-      <p className="mb-3 text-sm font-medium text-slate-700">Lista de usuarios</p>
+    <div className="space-y-2">   
       {usuarios.map((usuario) => {
         const isSelected = usuario.id === selectedId;
         const roleLabel = getRoleLabel(usuario.roleName);

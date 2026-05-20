@@ -1,4 +1,5 @@
 import { apiClient } from "../api/axiosClient";
+import type { CreateUserRequest } from "../types/createUserType";
 
 import type { UserInfo } from "../types/userInfo";
 import type { PageResponse } from "../types/pageTypes";
@@ -42,3 +43,19 @@ export const listadousuariosById = async (
 ) => {
   return fetchUserById(idToShow);
 };
+
+// ======================================
+// CREATE USER
+// ======================================
+
+export async function createUser(
+  request: CreateUserRequest
+) {
+  const response =
+    await apiClient.post(
+      "/user/createuser",
+      request
+    );
+
+  return response.data;
+}
